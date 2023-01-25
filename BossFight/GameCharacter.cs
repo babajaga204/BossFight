@@ -25,32 +25,11 @@ namespace BossFight
                 if (IsBoss)
                 {
                     var randomAttackDmg = RandomStrengthAttack();
-                    opponentCharacter.Health -= randomAttackDmg;
-                    Stamina -= 10;
-                    Console.WriteLine(Name
-                                      + " hits "
-                                      + opponentCharacter.Name
-                                      + " with "
-                                      + randomAttackDmg
-                                      + " damage, "
-                                      + opponentCharacter.Name
-                                      + " now has " + opponentCharacter.Health
-                                      + " health left");
-                    Thread.Sleep(1000);
+                    Fight(opponentCharacter, randomAttackDmg);
                 }
                 else
                 {
-                    opponentCharacter.Health -= MaxStrength;
-                    Stamina -= 10;
-                    Console.WriteLine(Name
-                                      + " hits "
-                                      + opponentCharacter.Name
-                                      + " with "
-                                      + MaxStrength
-                                      + ", " + opponentCharacter.Name
-                                      + " now has " + opponentCharacter.Health
-                                      + " health left");
-                    Thread.Sleep(1000);
+                    Fight(opponentCharacter, MaxStrength);
                 }
             }
             else
@@ -59,6 +38,21 @@ namespace BossFight
                 Console.WriteLine(Name + " has no stamina left! Recharge used instead of attack!");
                 Thread.Sleep(1000);
             }
+        }
+
+        private void Fight(GameCharacter opponent, int strength)
+        {
+            opponent.Health -= strength;
+            Stamina -= 10;
+            Console.WriteLine(Name
+                              + " hits "
+                              + opponent.Name
+                              + " with "
+                              + MaxStrength
+                              + ", " + opponent.Name
+                              + " now has " + opponent.Health
+                              + " health left");
+            Thread.Sleep(1000);
         }
 
         private int RandomStrengthAttack()
